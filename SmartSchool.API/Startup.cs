@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,10 +34,9 @@ namespace SmartSchool.API
                 context => context.UseSqlite(Configuration.GetConnectionString("Default"))
             );
 
-            //services.AddSingleton<IRepository, Repository>();
-            //services.AddTransient<IRepository, Repository>();
-            services.AddScoped<IRepository, Repository>();
             
+            services.AddScoped<IRepository, Repository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers()
                     .AddNewtonsoftJson(
